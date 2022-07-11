@@ -4,15 +4,6 @@ from flask_restful import Resource
 from flask_jwt_extended import create_access_token 
 
 
-''' JWT-Extended
-Disabled for now, but just add jwt_required decorator to any function you want 
-to secure access 
-'''
-
-''' With the db, we can replace these two mappings '''
-# username_mapping = { user.username: user for user in users}
-# userid_mapping = { user.id: user for user in users }
-
 def authenticate(username, password):
     user = UserModel.find_by_username(username=username)
     

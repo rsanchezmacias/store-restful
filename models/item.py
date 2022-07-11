@@ -10,9 +10,7 @@ class ItemModel(Base):
     id = Column(Integer, primary_key=True)
     name = Column(String(80))
     price = Column(Float(precision=2))
-    
-    # Creates a foreign key and creates a relationship with other table 
-    # This also creates a reference to the object the item belongs to using a relationship 
+
     store_id = Column(Integer, ForeignKey('stores.id'))
     store = relationship('StoreModel', back_populates='items')
     
@@ -26,7 +24,6 @@ class ItemModel(Base):
 
     @classmethod
     def find_by_name(cls, name: str) -> List:
-        # return cls.query.filter_by(name=name).first()
         return session.query(ItemModel).filter_by(name=name).first()
     
     @classmethod
@@ -34,13 +31,9 @@ class ItemModel(Base):
         return session.query(ItemModel).all()
         
     def save_to_db(self):
-        # db.session.add(self)
-        # db.session.commit()
         session.add(self)
         session.commit()
        
     def delete_from_db(self):
-        # db.session.delete(self)
-        # db.session.commit()
         session.delete(self)
         session.commit()

@@ -20,8 +20,6 @@ class UserRegistered(Resource):
         if UserRegistered.does_registered_user_exist_with(username=arguments['username']):
             return { 'message': 'Username {} is already taken'.format(arguments['username']) }, 400
         
-        # user = UserModel(username=arguments['username'], password=arguments['password'])
-        # kwargs unpacking dictionary 
         user = UserModel(**arguments)
         user.save_to_db()
         

@@ -18,6 +18,13 @@ app.config["JWT_SECRET_KEY"] = "this_is_my_secret_key"
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
 jwt = JWTManager(app)
 
+# Endpoints
+api.add_resource(Item, '/item/<string:name>')  
+api.add_resource(ItemList, '/items')
+api.add_resource(Login, '/login')
+api.add_resource(UserRegistered, '/register')
+api.add_resource(Store, '/store/<string:name>')
+api.add_resource(StoreList, '/stores')
 
 @app.before_first_request
 def create_tables():
@@ -25,13 +32,4 @@ def create_tables():
     
 
 if __name__ == '__main__':
-    api.add_resource(Item, '/item/<string:name>')  
-    api.add_resource(ItemList, '/items')
-    api.add_resource(Login, '/login')
-    api.add_resource(UserRegistered, '/register')
-    api.add_resource(Store, '/store/<string:name>')
-    api.add_resource(StoreList, '/stores')
-    
-    # db.init_app(app=app)
-    
     app.run(port=5000, debug=True)

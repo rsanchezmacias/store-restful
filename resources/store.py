@@ -2,7 +2,6 @@ from flask_restful import Resource, reqparse
 from models.store import StoreModel
 
 
-
 class Store(Resource):
     parser = reqparse.RequestParser()
     parser.add_argument('name', type=str, required=True, help='name field is required')

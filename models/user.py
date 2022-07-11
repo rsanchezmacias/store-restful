@@ -16,16 +16,12 @@ class UserModel(Base):
 
     @classmethod
     def find_by_username(cls, username):
-        # return cls.query.filter_by(username=username).first()
         return session.query(UserModel).filter_by(username=username).first()
     
     @classmethod 
     def find_by_id(cls, _id):
-        # return cls.query.filter_by(id=_id).first()
         return session.query(UserModel).filter_by(id=_id).first()
     
     def save_to_db(self):
-        # db.session.add(self)
-        # db.session.commit()
         session.add(self)
         session.commit()
