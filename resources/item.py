@@ -24,13 +24,15 @@ class Item(Resource):
         
         existing_item = ItemModel.find_by_name(name=name)
         if existing_item:
-            response = { 'message': 'Duplicate item with name: {}'.format(name) }, 400
-        else:
+            return { 'message': 'Duplicate item with name: {}'.format(name) }, 400
+        
+        try: 
             item = ItemModel(name=name, price=data['price'], store_id=data['store_id'])
             item.save_to_db()
-            response = item.json(), 201
+            return item.json(), 201
+        except:
+            return { 'message': 'Something went wrong' }, 500
         
-        return response
         
     @jwt_required()
     def delete(self, name: str) -> Dict: 
@@ -55,7 +57,11 @@ class Item(Resource):
             affected_item = ItemModel(name=name, price=data['price'], store_id=data['store_id'])
             response =  affected_item.json(), 201
         
-        affected_item.save_to_db()
+        try: 
+            affected_item.save_to_db()
+        except:
+            response = { 'message': 'Something went wrong' }, 500
+        
         return response    
     
     
