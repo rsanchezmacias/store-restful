@@ -14,7 +14,7 @@ from resources.store import Store, StoreList
 app = Flask(__name__)
 api = Api(app)
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL','sqlite:///db/data.db').replace('postgres', 'postgresql')
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL','sqlite:///db/data.db')
 
 app.config["JWT_SECRET_KEY"] = "this_is_my_secret_key"  
 app.config["SQLALCHEMY_TRACK_MODIFICATIONS"] = False
