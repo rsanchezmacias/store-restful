@@ -1,3 +1,4 @@
+import os 
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker
@@ -9,7 +10,8 @@ Base = declarative_base()
 
 # The engine represents the core interface to the database adapted through a dialect. In this example, SQLite 
 # is the dialect 
-engine = create_engine('sqlite:///db/data.db')
+uri = os.environ.get('DATABASE_URL', 'sqlite:///db/data.db').replace('postgres', 'postgresql')
+engine = create_engine(uri)
 
 # Session creates new session objects that can talk to the database. 
 Session = sessionmaker(bind=engine)
